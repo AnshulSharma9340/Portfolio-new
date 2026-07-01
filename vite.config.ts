@@ -12,4 +12,11 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Force Nitro on outside the Lovable sandbox, pinned to the Vercel preset.
+  // Without this, nitro only auto-runs inside Lovable's own build context,
+  // so a Git-connected Vercel deploy gets a Vite-only build with no server
+  // output — which is what was causing the 404: NOT_FOUND.
+  nitro: {
+    preset: "vercel",
+  },
 });
